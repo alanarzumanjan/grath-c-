@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 class Node {
@@ -8,22 +9,23 @@ public:
 
     Node(int val){
         data = val;
-        left = right = NULL;
     }
 };
 
 class BinarySearchTree {
+
 private:
     Node* root;
-    
-    Node* insert(Node* node, int val) {
 
-        if (val < node->data) 
-        {
+    Node* insert(Node* node, int val) {
+        if (node == nullptr){
+            return new Node(val);
+        }
+
+        if (val < node->data){
             node->left = insert(node->left, val);
-        } 
-        else if (val > node->data)
-        {
+        }
+        else if (val > node->data){
             node->right = insert(node->right, val);
         }
 
@@ -31,17 +33,17 @@ private:
     }
 
     bool search(Node* node, int val) {
+        if (node == nullptr){
+            return false;
+        }
 
-        if (val == node->data)
-        {
+        if (val == node->data){
             return true;
         } 
-        else if (val < node->data)
-        {
+        else if (val < node->data){
             return search(node->left, val);
         } 
-        else
-        {
+        else{
             return search(node->right, val);
         }
     }
@@ -68,39 +70,30 @@ public:
         return search(root, val);
     }
 
-    void inorder()
-    {
+    void inorder() {
         inorder(root);
         cout << endl;
     }
 };
 
 int main() {
-    BinarySearchTree tree;
+    BinarySearchTree Tree;
 
-    tree.insert(10);
-    tree.insert(5);
-    tree.insert(15);
-    tree.insert(2);
-    tree.insert(7);
-    tree.insert(9);
-    tree.insert(11);
-    tree.insert(16);
-    tree.insert(22);
-    
+    for(int i = 0; i < 20; i++){
+        int random = rand() % 48;
+        Tree.insert(random);
+    }
 
     cout << "Inorder: ";
-    tree.inorder();
+    Tree.inorder();
 
     int key;
-    cout << "Enter seach number: ";
+    cout << "Enter search number: ";
     cin >> key;
-    if (tree.search(key))
-    {
+
+    if (Tree.search(key)){
         cout << key << " found" << endl;
-    } 
-    else
-    {
+    } else{
         cout << key << " not found" << endl;
     }
 
