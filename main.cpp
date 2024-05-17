@@ -17,16 +17,16 @@ class BinarySearchTree {
 private:
     Node* root;
 
-    Node* insert(Node* node, int val) {
+    Node* add(Node* node, int val) {
         if (node == nullptr){
             return new Node(val);
         }
 
         if (val < node->data){
-            node->left = insert(node->left, val);
+            node->left = add(node->left, val);
         }
         else if (val > node->data){
-            node->right = insert(node->right, val);
+            node->right = add(node->right, val);
         }
 
         return node;
@@ -48,21 +48,21 @@ private:
         }
     }
 
-    void inorder(Node* node) {
+    void in_order(Node* node) {
         if (node != nullptr)
         {
-            inorder(node->left);
+            in_order(node->left);
             cout << node->data << " ";
-            inorder(node->right);
+            in_order(node->right);
         }
     }
 
 public:
     BinarySearchTree() : root(nullptr) {}
 
-    void insert(int val)
+    void add(int val)
     {
-        root = insert(root, val);
+        root = add(root, val);
     }
 
     bool search(int val)
@@ -70,8 +70,8 @@ public:
         return search(root, val);
     }
 
-    void inorder() {
-        inorder(root);
+    void in_order() {
+        in_order(root);
         cout << endl;
     }
 };
@@ -81,11 +81,11 @@ int main() {
 
     for(int i = 0; i < 20; i++){
         int random = rand() % 48;
-        Tree.insert(random);
+        Tree.add(random);
     }
 
-    cout << "Inorder: ";
-    Tree.inorder();
+    cout << "in_order: ";
+    Tree.in_order();
 
     int key;
     cout << "Enter search number: ";

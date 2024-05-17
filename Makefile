@@ -2,7 +2,7 @@ TARGET = main
 SRC_FILE = $(TARGET).cpp
 
 CC = g++
-# CFLAGS = -lm -std=c++14
+CFLAGS = -lm -std=c++14
 
 all: clean build run
 
